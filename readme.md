@@ -2,7 +2,7 @@
 # Django E-Commerce web application
 
 This Django E-Commerce web application is a fully functional and customizable online store platform. It provides a robust foundation for 
-building and managing an e-commerce website, allowing you to sell products or services online with ease.
+building and managing an e-commerce website, allowing you to purchase products online with ease.
 
 ![](https://github.com/shashank026/zenatix-assignment/blob/main/readmeImage/Admin_Dashboard.gif)
 
@@ -81,3 +81,23 @@ To stop the application running from docker, do run the following commands:
 ```bash
 docker-compose down
 ```
+
+## Admin Dashboard Access
+
+The admin dashboard provides administrative access to manage various aspects of the Django E-Commerce web application. With the admin dashboard, the admin can perform the following actions:
+
+- Change the image, price, quantity and name of a product.
+- Modify the status of an order.
+- Block or unblock user accounts.
+
+To access the admin dashboard, follow these steps:
+
+- Open your web browser and navigate to the admin login page: `/accounts/admin-login`
+- Enter the following demo admin account credentials:
+   - Username: `admin@admin.com`
+   - Password: `admin123`
+- Click the __"Login"__ button to log in.
+
+Once logged in, you will have access to the admin dashboard and its features.
+
+__Please note that the provided demo admin account is for testing purposes only. In a production environment, it is essential to create a secure and unique admin account with a strong password.__
