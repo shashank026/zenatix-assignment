@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="style.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Admin Dashboard Panel</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+</head>
+
+<body>
+    <style>
+        /* ===== Google Font Import - Poppins ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            /* ===== Colors ===== */
+            --primary-color: #0E4BF1;
+            --panel-color: #FFF;
+            --text-color: #000;
+            --black-light-color: #707070;
+            --border-color: #e6e5e5;
+            --toggle-color: #DDD;
+            --box1-color: #4DA3FF;
+            --box2-color: #FFE6AC;
+            --box3-color: #E7D1FC;
+            --title-icon-color: #fff;
+
+            /* ====== Transition ====== */
+            --tran-05: all 0.5s ease;
+            --tran-03: all 0.3s ease;
+            --tran-03: all 0.2s ease;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--primary-color);
+        }
+
+        body.dark {
+            --primary-color: #3A3B3C;
+            --panel-color: #242526;
+            --text-color: #CCC;
+            --black-light-color: #CCC;
+            --border-color: #4D4C4C;
+            --toggle-color: #FFF;
+            --box1-color: #3A3B3C;
+            --box2-color: #3A3B3C;
+            --box3-color: #3A3B3C;
+            --title-icon-color: #CCC;
+        }
+
+        /* === Custom Scroll Bar CSS === */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0b3cc1;
+        }
+
+        body.dark::-webkit-scrollbar-thumb:hover,
+        body.dark .activity-data::-webkit-scrollbar-thumb:hover {
+            background: #3A3B3C;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            padding: 10px 14px;
+            background-color: var(--panel-color);
+            border-right: 1px solid var(--border-color);
+            transition: var(--tran-05);
+        }
+
+        nav.close {
+            width: 73px;
+        }
+
+        nav .logo-name {
+            display: flex;
+            align-items: center;
+        }
+
+        nav .logo-image {
+            display: flex;
+            justify-content: center;
+            min-width: 45px;
+        }
+
+        nav .logo-image img {
+            width: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        nav .logo-name .logo_name {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-left: 14px;
+            transition: var(--tran-05);
+        }
+
+        nav.close .logo_name {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        nav .menu-items {
+            margin-top: 40px;
+            height: calc(100% - 90px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-items li {
+            list-style: none;
+        }
+
+        .menu-items li a {
+            display: flex;
+            align-items: center;
+            height: 50px;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .nav-links li a:hover:before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            height: 5px;
+            width: 5px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        body.dark li a:hover:before {
+            background-color: var(--text-color);
+        }
+
+        .menu-items li a i {
+            font-size: 24px;
+            min-width: 45px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--black-light-color);
+        }
+
+        .menu-items li a .link-name {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--black-light-color);
+            transition: var(--tran-05);
+        }
+
+        nav.close li a .link-name {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .nav-links li a:hover i,
+        .nav-links li a:hover .link-name {
+            color: var(--primary-color);
+        }
+
+        body.dark .nav-links li a:hover i,
+        body.dark .nav-links li a:hover .link-name {
+            color: var(--text-color);
+        }
+
+        .menu-items .logout-mode {
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .menu-items .mode {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .menu-items .mode-toggle {
+            position: absolute;
+            right: 14px;
+            height: 50px;
+            min-width: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .mode-toggle .switch {
+            position: relative;
+            display: inline-block;
+            height: 22px;
+            width: 40px;
+            border-radius: 25px;
+            background-color: var(--toggle-color);
+        }
+
+        .switch:before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 15px;
+            width: 15px;
+            background-color: var(--panel-color);
+            border-radius: 50%;
+            transition: var(--tran-03);
+        }
+
+        body.dark .switch:before {
+            left: 20px;
+        }
+
+        .dashboard {
+            position: relative;
+            left: 250px;
+            background-color: var(--panel-color);
+            min-height: 100vh;
+            width: calc(100% - 250px);
+            padding: 10px 14px;
+            transition: var(--tran-05);
+        }
+
+        nav.close~.dashboard {
+            left: 73px;
+            width: calc(100% - 73px);
+        }
+
+        .dashboard .top {
+            position: fixed;
+            top: 0;
+            left: 250px;
+            display: flex;
+            width: calc(100% - 250px);
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background-color: var(--panel-color);
+            transition: var(--tran-05);
+            z-index: 10;
+        }
+
+        nav.close~.dashboard .top {
+            left: 73px;
+            width: calc(100% - 73px);
+        }
+
+        .dashboard .top .sidebar-toggle {
+            font-size: 26px;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .dashboard .top .search-box {
+            position: relative;
+            height: 45px;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 30px;
+        }
+
+        .top .search-box input {
+            position: absolute;
+            border: 1px solid var(--border-color);
+            background-color: var(--panel-color);
+            padding: 0 25px 0 50px;
+            border-radius: 5px;
+            height: 100%;
+            width: 100%;
+            color: var(--text-color);
+            font-size: 15px;
+            font-weight: 400;
+            outline: none;
+        }
+
+        .top .search-box i {
+            position: absolute;
+            left: 15px;
+            font-size: 22px;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--black-light-color);
+        }
+
+        .top img {
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        .dashboard .dash-content {
+            padding-top: 50px;
+        }
+
+        .dash-content .title {
+            display: flex;
+            align-items: center;
+            margin: 60px 0 30px 0;
+        }
+
+        .dash-content .title i {
+            position: relative;
+            height: 35px;
+            width: 35px;
+            background-color: var(--primary-color);
+            border-radius: 6px;
+            color: var(--title-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .dash-content .title .text {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-left: 10px;
+        }
+
+        .dash-content .boxes {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .dash-content .boxes .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 12px;
+            width: calc(100% / 3 - 15px);
+            padding: 15px 20px;
+            background-color: var(--box1-color);
+            transition: var(--tran-05);
+        }
+
+        .boxes .box i {
+            font-size: 35px;
+            color: var(--text-color);
+        }
+
+        .boxes .box .text {
+            white-space: nowrap;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .boxes .box .number {
+            font-size: 40px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .boxes .box.box2 {
+            background-color: var(--box2-color);
+        }
+
+        .boxes .box.box3 {
+            background-color: var(--box3-color);
+        }
+
+        .dash-content .activity .activity-data {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .activity .activity-data {
+            display: flex;
+        }
+
+        .activity-data .data {
+            display: flex;
+            flex-direction: column;
+            margin: 0 15px;
+        }
+
+        .activity-data .data-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .activity-data .data .data-list {
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 20px;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 1000px) {
+            nav {
+                width: 73px;
+            }
+
+            nav.close {
+                width: 250px;
+            }
+
+            nav .logo_name {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            nav.close .logo_name {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            nav li a .link-name {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            nav.close li a .link-name {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            nav~.dashboard {
+                left: 73px;
+                width: calc(100% - 73px);
+            }
+
+            nav.close~.dashboard {
+                left: 250px;
+                width: calc(100% - 250px);
+            }
+
+            nav~.dashboard .top {
+                left: 73px;
+                width: calc(100% - 73px);
+            }
+
+            nav.close~.dashboard .top {
+                left: 250px;
+                width: calc(100% - 250px);
+            }
+
+            .activity .activity-data {
+                overflow-X: scroll;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .dash-content .boxes .box {
+                width: calc(100% / 2 - 15px);
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .dash-content .boxes .box {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            nav {
+                width: 0px;
+            }
+
+            nav.close {
+                width: 73px;
+            }
+
+            nav .logo_name {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            nav.close .logo_name {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            nav li a .link-name {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            nav.close li a .link-name {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            nav~.dashboard {
+                left: 0;
+                width: 100%;
+            }
+
+            nav.close~.dashboard {
+                left: 73px;
+                width: calc(100% - 73px);
+            }
+
+            nav~.dashboard .top {
+                left: 0;
+                width: 100%;
+            }
+
+            nav.close~.dashboard .top {
+                left: 0;
+                width: 100%;
+            }
+        }
+
+        .btn-primary-custom {
+            cursor: pointer;
+            color: white;
+            background-color: blue;
+            border: none;
+            padding: 1px 2px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        main.table {
+            width: 82vw;
+            height: 90vh;
+            background-color: #fff5;
+
+            backdrop-filter: blur(7px);
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+
+            overflow: hidden;
+        }
+
+        .table__header {
+            width: 100%;
+            height: 10%;
+            background-color: #fff4;
+            padding: .8rem 4rem;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table__header .input-group {
+            width: 35%;
+            height: 100%;
+            background-color: #fff5;
+            padding: 0 .8rem;
+            border-radius: 2rem;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition: .2s;
+        }
+
+        .table__header .input-group:hover {
+            width: 45%;
+            background-color: #fff8;
+            box-shadow: 0 .1rem .4rem #0002;
+        }
+
+        .table__header .input-group img {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        .table__header .input-group input {
+            width: 100%;
+            padding: 0 .5rem 0 .3rem;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .table__body {
+            width: 95%;
+            max-height: calc(89% - 1.6rem);
+            background-color: #fffb;
+
+            margin: .8rem auto;
+            border-radius: .6rem;
+
+            overflow: auto;
+            overflow: overlay;
+        }
+
+        .table__body::-webkit-scrollbar {
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+
+        .table__body::-webkit-scrollbar-thumb {
+            border-radius: .5rem;
+            background-color: #0004;
+            visibility: hidden;
+        }
+
+        .table__body:hover::-webkit-scrollbar-thumb {
+            visibility: visible;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td img {
+            width: 36px;
+            height: 36px;
+            margin-right: .5rem;
+            border-radius: 50%;
+
+            vertical-align: middle;
+        }
+
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: #d5d1defe;
+            cursor: pointer;
+            text-transform: capitalize;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #0000000b;
+        }
+
+        tbody tr {
+            --delay: .1s;
+            transition: .5s ease-in-out var(--delay), background-color 0s;
+        }
+
+        tbody tr.hide {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        tbody tr:hover {
+            background-color: #fff6 !important;
+        }
+
+        tbody tr td,
+        tbody tr td p,
+        tbody tr td img {
+            transition: .2s ease-in-out;
+        }
+
+        tbody tr.hide td,
+        tbody tr.hide td p {
+            padding: 0;
+            font: 0 / 0 sans-serif;
+            transition: .2s ease-in-out .5s;
+        }
+
+        tbody tr.hide td img {
+            width: 0;
+            height: 0;
+            transition: .2s ease-in-out .5s;
+        }
+
+        .status {
+            padding: .4rem 0;
+            border-radius: 2rem;
+            text-align: center;
+        }
+
+        .status.COMPLETED {
+            background-color: #86e49d;
+            color: #006b21;
+        }
+
+        .status.CANCELED {
+            background-color: #d893a3;
+            color: #b30021;
+        }
+
+        .status.PENDING {
+            background-color: #6fcaea;
+        }
+
+
+        @media (max-width: 1000px) {
+            td:not(:first-of-type) {
+                min-width: 12.1rem;
+            }
+        }
+
+        thead th span.icon-arrow {
+            display: inline-block;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-radius: 50%;
+            border: 1.4px solid transparent;
+
+            text-align: center;
+            font-size: 1rem;
+
+            margin-left: .5rem;
+            transition: .2s ease-in-out;
+        }
+
+        thead th:hover span.icon-arrow {
+            border: 1.4px solid #6c00bd;
+        }
+
+        thead th:hover {
+            color: #6c00bd;
+        }
+
+        thead th.active span.icon-arrow {
+            background-color: #6c00bd;
+            color: #fff;
+        }
+
+        thead th.asc span.icon-arrow {
+            transform: rotate(180deg);
+        }
+
+        thead th.active,
+        tbody td.active {
+            color: #6c00bd;
+        }
+
+        .export__file {
+            position: relative;
+        }
+
+        .export__file .export__file-btn {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: #fff6 url(images/export.png) center / 80% no-repeat;
+            border-radius: 50%;
+            transition: .2s ease-in-out;
+        }
+
+        .export__file .export__file-btn:hover {
+            background-color: #fff;
+            transform: scale(1.15);
+            cursor: pointer;
+        }
+
+        .export__file input {
+            display: none;
+        }
+
+        .export__file .export__file-options {
+            position: absolute;
+            right: 0;
+
+            width: 12rem;
+            border-radius: .5rem;
+            overflow: hidden;
+            text-align: center;
+
+            opacity: 0;
+            transform: scale(.8);
+            transform-origin: top right;
+
+            box-shadow: 0 .2rem .5rem #0004;
+
+            transition: .2s;
+        }
+
+        .export__file input:checked+.export__file-options {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 100;
+        }
+
+        .export__file .export__file-options label {
+            display: block;
+            width: 100%;
+            padding: .6rem 0;
+            background-color: #f2f2f2;
+
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            transition: .2s ease-in-out;
+        }
+
+        .export__file .export__file-options label:first-of-type {
+            padding: 1rem 0;
+            background-color: #86e49d !important;
+        }
+
+        .export__file .export__file-options label:hover {
+            transform: scale(1.05);
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .export__file .export__file-options img {
+            width: 2rem;
+            height: auto;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .col-lg-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .card {
+            position: relative;
+            top: 15px;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.25rem;
+            background-color: #fff;
+            background-clip: border-box;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            padding: 1.25rem;
+        }
+
+        #chart {
+            height: 300px;
+        }
+
+        .button4 {
+            border-radius: 12px;
+        }
+
+        .button {
+            border: none;
+            color: white;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+    <style>
+        .popup-outer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .popup-outer.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-box {
+            background-color: #fff;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-box {
+            text-align: center;
+        }
+
+        .image-box img {
+            width: 96px;
+            height: 96px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .input-field {
+            margin-top: 20px;
+        }
+
+        .input-field input,
+        .input-field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .input-field input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .input-field textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .cross {
+            position: absolute;
+            top: 60px;
+            right: 37%;
+            font-size: 24px;
+            color: #b4b4b4;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .cross:hover {
+            color: #000;
+        }
+
+        .image-box input[type="file"] {
+            display: none;
+        }
+
+        .image-box button {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .button-container button {
+            margin-left: 10px;
+        }
+
+        .popup-outer-edit {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .popup-outer-edit.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-box-edit {
+            background-color: #fff;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-box-edit {
+            text-align: center;
+        }
+
+        .image-box-edit img {
+            width: 96px;
+            height: 96px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .input-field {
+            margin-top: 20px;
+        }
+
+        .input-field input,
+        .input-field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .input-field input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .input-field textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .cross-edit {
+            position: absolute;
+            top: 60px;
+            right: 37%;
+            font-size: 24px;
+            color: #b4b4b4;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .cross-edit:hover {
+            color: #000;
+        }
+
+        .image-box-edit input[type="file"] {
+            display: none;
+        }
+
+        .image-box-edit button {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+
+        .button-container-edit {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .button-container-edit button {
+            margin-left: 10px;
+        }
+    </style>
+    <div class="popup-outer" id="popup">
+        <div class="popup-box">
+            <h2 style="text-align: center;">Add New Product</h2>
+            <i id="cross" class="uil uil-times cross"></i>
+            <div class="image-box">
+                <img src="https://static.thenounproject.com/png/1765551-200.png" class="border rounded me-3"
+                    style="width: 150px; height: 150px;" />
+                <input required type="file" id="upload-image" accept="image/*" style="display: none;">
+                <button id="upload-btn">Upload Image</button>
+            </div>
+            <div class="input-field">
+                <input required type="text" name="product_name" value="" placeholder="Product Name">
+                <input required type="number" name="price" value="" placeholder="Product Price in ₹">
+                <textarea required name="product_description" placeholder="Product Description"></textarea>
+                <input required type="number" name="product_quantity" value="" placeholder="Product Quantity">
+
+                <div class="button-container">
+                    <button class="button button4" style="background-color: #0b3cc1; cursor: pointer;"
+                        id="save-btn">Save</button>
+                    <button class="button button4" style="background-color: red; cursor: pointer;"
+                        id="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ######### Edit Product ######### -->
+    <div class="popup-outer-edit" id="popup-edit">
+        <div class="popup-box-edit">
+            <h2 style="text-align: center;">Edit Product Details</h2>
+            <i id="cross-edit" class="uil uil-times cross-edit"></i>
+            <div class="image-box-edit">
+                <img id="show-image-edit" src="https://static.thenounproject.com/png/1765551-200.png"
+                    class="border rounded me-3" style="width: 150px; height: 150px;" />
+                <input required type="file" id="upload-image-edit" accept="image/*" style="display: none;">
+                <button id="upload-btn-edit">Upload Image</button>
+            </div>
+            <div class="input-field">
+                <input required type="text" name="product_name" value="" placeholder="Product Name">
+                <input required type="text" name="price" value="" placeholder="Product Price in ₹">
+                <textarea required name="product_description"
+                    placeholder="Product Description is not available at this time, please try after sometime."></textarea>
+                <input required type="number" name="product_quantity" value="" placeholder="Product Quantity">
+
+                <div class="button-container-edit">
+                    <button class="button button4" style="background-color: #0b3cc1; cursor: pointer;"
+                        id="save-btn-edit">Save</button>
+                    <button class="button button4" style="background-color: red; cursor: pointer;"
+                        id="cancel-btn-edit">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="logo-name">
+            <span class="logo_name">Admin Dashboard</span>
+        </div>
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li id="show-main-content"><a href="?">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Dahsboard</span>
+                    </a></li>
+                <li id="show-order-content"><a href="?order-content">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Order History</span>
+                    </a></li>
+                <li><a href="?product-content">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Products</span>
+                    </a></li>
+                <li><a href="?user-content">
+                        <i class="uil uil-user"></i>
+                        <span class="link-name">Users</span>
+                    </a></li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li id="logout-link-admin"><a href="#">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a></li>
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Dark Mode</span>
+                    </a>
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" id="searchInput" placeholder="Search here...">
+            </div>
+
+            <!--<img src="images/profile.jpg" alt="">-->
+        </div>
+        <div class="dash-content" id="main-content">
+            <div class="row">
+                <div class="col-lg-6 pt-5">
+                    <div class="card mb-4 mb-lg-0">
+                        <div class="card-body p-0">
+                            <div id="chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 pt-5">
+                    <div class="card mb-4 mb-lg-0">
+                        <div class="card-body p-0">
+                            <div id="chart-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dash-content" id="order-content" style="display: none;">
+            <main class="table">
+                <section class="table__header">
+                    <h1>Order History</h1>
+                </section>
+                <section class="table__body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> OrderId <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Customer Name <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Status <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Price <span class="icon-arrow">&UpArrow;</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td style="color: #000; font-weight: 700;"> #{{ order.order_id }} </td>
+                                <td> {{ order.user.first_name }} </td>
+                                <td>
+                                    {% if order.status != 'PENDING' %}
+                                    {% if order.status == 'COMPLETED' %}
+                                    <p class="status {{ order.status }}">Delivered</p>
+                                    {% elif order.status == 'CANCELED' %}
+                                    <p class="status {{ order.status }}">Canceled</p>
+                                    {% endif %}
+                                    {% else %}
+                                    <div>
+                                        <select class="status {{ order.status }}" name="orderStatus"
+                                            id="orderStatus-{{ order.order_id }}" style="cursor: pointer;">
+                                            <option value="{{ order.status }}">Shipped</option>
+                                            <option value="COMPLETED">Delivered</option>
+                                            <option value="CANCELED">Canceled</option>
+                                        </select>
+                                        <input type="submit" style="border: none; cursor: pointer; width: 50px;"
+                                            value="Save" class="status PENDING" id="saveButton-{{ order.order_id }}" />
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td style="color: green;"> ₹{{ order.total_amount }} </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+        <div class="dash-content" id="product-content" style="display: none;">
+            <main class="table">
+                <section class="table__header">
+                    <h1>Product Details</h1>
+                    <button class="button button4" id="open-popup"
+                        style="border: none;background-color: transparent; cursor: pointer; background-color: #0E4BF1;">Add
+                        New Product <i class="uil uil-plus"></i></button>
+                </section>
+                <section class="table__body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> Product <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Quantity <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Amount <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Category <span class="icon-arrow">&UpArrow;</span></th>
+                                <th> Actions <span class="icon-arrow">&UpArrow;</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                            <tr id="{{ product.uid }}">
+                                <td> <img src="/media/{{ product.products_images.first.image }}"><span
+                                        style="max-width: 10px;"> {{ product.product_name }} </span></td>
+                                <td> {{ product.product_quantity }} </td>
+                                <td> <strong style="color: green;"> ₹{{ product.price }}.00 </strong> </td>
+                                <td> {{ product.category }} </td>
+                                <td class="data-list" id="editProduct-{{ product.uid }}"><button
+                                        class="button button4 edit-product-btn"
+                                        style="border: none; background-color: blue; cursor: pointer;">Edit
+                                        Product</button></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+        <div class="dash-content" id="user-content" style="display: none;">
+            <main class="table">
+                <section class="table__header">
+                    <h1>User Details</h1>
+                </section>
+                <section class="table__body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> Name </th>
+                                <th> Email </th>
+                                <th> Phone Number </th>
+                                <th> Date Joined </th>
+                                <th> User Status </th>
+                                <th> Actions </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            {% if not user.is_staff %}
+                            <tr class="user-row">
+                                {% if not user.profile.profile_image %}
+                                <td> <img
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"><span
+                                        style="max-width: 10px;">
+                                        {{ user.first_name }} {{ user.last_name }} </span>
+                                </td>
+                                {% else %}
+                                <td> <img src="/media/{{ user.profile.profile_image }}"><span style="max-width: 10px;">
+                                        {{ user.first_name }} {{ user.last_name }} </span>
+                                </td>
+                                {% endif %}
+                                <td class="user-email"> {{ user.email }} </td>
+                                <td> {{ user.profile.phone_number }}</td>
+                                <td class="data-list">{{ user.date_joined|date:'d/m/Y' }}</td>
+                                {% if not user.profile.is_blocked %}
+                                <td style="color: #006b21;"> Active </td>
+                                {% else %}
+                                <td style="color: red;"> Blocked </td>
+                                {% endif %}
+                                {% if user.profile.is_blocked %}
+                                <td class="data-list"><button class="button button4" id="block-user-{{ user.email }}"
+                                        style="border: none; background-color: blue; cursor: pointer;">Unblock
+                                        User</button></td>
+                                {% else %}
+                                <td class="data-list"><button class="button button4" id="block-user-{{ user.email }}"
+                                        style="border: none; background-color: red; cursor: pointer;">Block
+                                        User</button></td>
+                                {% endif %}
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </section>
+</body>
+<script>
+    const url = window.location.href;
+    const fragment = url.split('?')[1];
+    if (fragment !== 'undefined') {
+        if (fragment == 'order-content') {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('product-content').style.display = 'none';
+            document.getElementById('order-content').style.display = 'block';
+            document.getElementById('user-content').style.display = 'none';
+        }
+        if (fragment == 'product-content') {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('product-content').style.display = 'block';
+            document.getElementById('order-content').style.display = 'none';
+            document.getElementById('user-content').style.display = 'none';
+        }
+        if (fragment == 'user-content') {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('user-content').style.display = 'block';
+            document.getElementById('product-content').style.display = 'none';
+            document.getElementById('order-content').style.display = 'none';
+        }
+    } else {
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('order-content').style.display = 'none';
+        document.getElementById('product-content').style.display = 'none';
+        document.getElementById('user-content').style.display = 'none';
+    }
+</script>
+<script>
+    const body = document.querySelector("body"),
+        modeToggle = body.querySelector(".mode-toggle");
+    sidebar = body.querySelector("nav");
+    sidebarToggle = body.querySelector(".sidebar-toggle");
+    let getMode = localStorage.getItem("mode");
+    if (getMode && getMode === "dark") {
+        body.classList.toggle("dark");
+    }
+    let getStatus = localStorage.getItem("status");
+    if (getStatus && getStatus === "close") {
+        sidebar.classList.toggle("close");
+    }
+    modeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        if (body.classList.contains("dark")) {
+            localStorage.setItem("mode", "dark");
+        } else {
+            localStorage.setItem("mode", "light");
+        }
+    });
+    sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+        if (sidebar.classList.contains("close")) {
+            localStorage.setItem("status", "close");
+        } else {
+            localStorage.setItem("status", "open");
+        }
+    })
+</script>
+<script>
+    // Attach event listeners to the save buttons
+    var saveButtons = document.querySelectorAll("[id^='saveButton-']");
+    saveButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var orderId = this.id.replace('saveButton-', '');
+            console.log(orderId)
+            var selectElement = document.getElementById('orderStatus-' + orderId);
+            var status = selectElement.value;
+
+            if (status != 'PENDING') {
+                // Make an AJAX request to update the order status
+                fetch('/accounts/api/admin/orders/status/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',// Replace with the actual CSRF token from your Django template
+                    },
+                    body: JSON.stringify({
+                        'order_id': orderId,
+                        'status': status
+                    })
+                })
+                    .then(function (response) {
+                        if (response.ok) {
+                            // Handle the response
+                            return response.json();
+                        } else {
+                            throw new Error('Failed to update order status');
+                        }
+                    })
+                    .then(function (data) {
+                        // Handle the successful response
+                        if (data.status === 200) {
+                            // Success
+                            alert('Order status updated successfully');
+                            location.reload(); // Reload the page
+                        } else {
+                            // Error
+                            alert('Failed to update order status');
+                        }
+                    })
+                    .catch(function (error) {
+                        // Handle the error
+                        console.error(error);
+                        alert('Failed to update order status');
+                    });
+            } else {
+                alert('Please select the status to change.')
+            }
+        });
+    });
+
+    var blockButton = document.querySelectorAll("[id^='block-user-']")
+    blockButton.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var email = this.id.replace('block-user-', '');
+            console.log(email);
+
+            if (confirm("Do you want to block/unblock this user: " + email) == true) {
+                fetch('/accounts/api/admin/block-user/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',// Replace with the actual CSRF token from your Django template
+                    },
+                    body: JSON.stringify({
+                        'email': email
+                    })
+                })
+                    .then(function (response, error) {
+                        if (response.ok) {
+                            // Handle the response
+                            return response.json();
+                        } else {
+                            console.log(error)
+                            throw new Error('Failed to block the user, try again later.');
+                        }
+                    })
+                    .then(function (data) {
+                        // Handle the successful response
+                        if (data.status === 200) {
+                            // Success
+                            alert(data.message);
+                            location.reload(); // Reload the page
+                        } else if (data.status === 403) {
+                            // Error
+                            alert(data.message);
+                        } else {
+                            alert(data.message)
+                        }
+                    })
+                    .catch(function (error) {
+                        // Handle the error
+                        console.error(error);
+                        alert('Failed to block the user, try again later.');
+                    });
+            }
+
+        });
+    });
+</script>
+
+<script>
+    var options = {
+        series: [{
+            name: 'Inflation',
+            data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+        }],
+        chart: {
+            height: 350,
+            type: 'bar',
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 10,
+                dataLabels: {
+                    position: 'top', // top, center, bottom
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + "%";
+            },
+            offsetY: -20,
+            style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+            }
+        },
+
+        xaxis: {
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            position: 'top',
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            },
+            crosshairs: {
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        colorFrom: '#D8E3F0',
+                        colorTo: '#BED1E6',
+                        stops: [0, 100],
+                        opacityFrom: 0.4,
+                        opacityTo: 0.5,
+                    }
+                }
+            },
+            tooltip: {
+                enabled: true,
+            }
+        },
+        yaxis: {
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false,
+            },
+            labels: {
+                show: false,
+                formatter: function (val) {
+                    return val + "%";
+                }
+            }
+
+        },
+        title: {
+            text: 'Monthly Inflation in Argentina, 2002',
+            floating: true,
+            offsetY: 330,
+            align: 'center',
+            style: {
+                color: '#444'
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+
+
+    var options = {
+        series: [44, 55, 41, 17, 15],
+        chart: {
+            type: 'donut',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart-2"), options);
+    chart.render();
+</script>
+<script>
+    document.getElementById('logout-link-admin').addEventListener('click', function () {
+
+        fetch('/accounts/logout/', {
+            method: 'POST'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Handle the response based on the status
+                if (data.status === 200) {
+                    window.location.href = '/accounts/login/';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                // Handle any other errors
+            });
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    const currentURL = window.location.href;
+    const SearchFrame = currentURL.split('?')[1];
+    if (SearchFrame == 'user-content') {
+        $(document).ready(function () {
+            $('#searchInput').on('input', function () {
+                var searchText = $(this).val().toLowerCase();
+
+                $('.user-row').each(function () {
+                    var userFullName = $(this).find('.user-email').text().toLowerCase();
+                    if (userFullName.includes(searchText)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    }
+</script>
+
+
+
+<script>
+    document.getElementById("upload-image").addEventListener("change", function (event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var previewImage = document.querySelector(".image-box img");
+                previewImage.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+
+    document.getElementById("upload-image-edit").addEventListener("change", function (event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var previewImage = document.querySelector(".image-box-edit img");
+                previewImage.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+
+    // Add an event listener to open the popup
+    document.getElementById("open-popup").addEventListener("click", function () {
+        document.getElementById("popup").classList.add("show");
+    });
+
+
+
+    // Add an event listener to close the popup
+    document.getElementById("cross").addEventListener("click", function () {
+        document.getElementById("popup").classList.remove("show");
+    });
+
+
+
+    // Add an event listener to the upload image button
+    document.getElementById("upload-btn").addEventListener("click", function () {
+        document.getElementById("upload-image").click();
+    });
+
+
+
+    // Add an event listener to the save button
+    // document.getElementById("save-btn").addEventListener("click", function () {
+    //     // Save logic goes here
+    //     document.getElementById("popup").classList.remove("show");
+    // });
+    document.getElementById('save-btn').addEventListener('click', function () {
+        var productName = document.querySelector('input[name="product_name"]').value;
+        var price = document.querySelector('input[name="price"]').value;
+        // var category = document.querySelector('input[name="category"]').value;
+        var productDescription = document.querySelector('textarea[name="product_description"]').value;
+        var productQuantity = document.querySelector('input[name="product_quantity"]').value;
+        var imageFile = document.getElementById('upload-image').files[0];
+
+        if (confirm('Are you sure you want to add this product.') == true) {
+            console.log(productName)
+            console.log(price)
+            var formData = new FormData();
+            formData.append('product_name', productName);
+            formData.append('price', price);
+            formData.append('product_description', productDescription);
+            formData.append('product_quantity', productQuantity);
+            formData.append('image', imageFile);
+
+            fetch('/accounts/api/admin/add-product/', {
+                method: 'POST',
+                body: formData
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    // Handle the response data
+                    alert(data.message)
+                    location.reload(); // Reload the page
+                })
+                .catch(function (error) {
+                    alert(data.message)
+                });
+        }
+    });
+
+    // Add an event listener to the cancel button
+    document.getElementById("cancel-btn").addEventListener("click", function () {
+        document.getElementById("popup").classList.remove("show");
+    });
+
+
+
+</script>
+
+<script>
+    var editButtons = document.querySelectorAll("[id^='editProduct-']");
+
+    editButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var popupId = "popup-edit";
+            var popupEdit = document.getElementById(popupId);
+
+            if (popupEdit) {
+                popupEdit.classList.add("show");
+            }
+
+            var crossEdit = popupEdit.querySelector("#cross-edit");
+            var cancelBtnEdit = popupEdit.querySelector("#cancel-btn-edit");
+            var uploadBtnEdit = popupEdit.querySelector("#upload-btn-edit");
+            var submitbtnEdit = popupEdit.querySelector("#save-btn-edit");
+
+            if (crossEdit) {
+                crossEdit.addEventListener("click", function () {
+                    popupEdit.classList.remove("show");
+                });
+            }
+
+            if (cancelBtnEdit) {
+                cancelBtnEdit.addEventListener("click", function () {
+                    popupEdit.classList.remove("show");
+                });
+            }
+
+            if (uploadBtnEdit) {
+                uploadBtnEdit.addEventListener("click", function () {
+                    document.getElementById("upload-image-edit").click();
+                });
+            }
+
+            var productID = this.id.replace('editProduct-', '');
+            // console.log(productID);
+            // console.log(document.getElementById(productID).querySelector('img').getAttribute('src'));
+            // console.log(document.getElementById(productID).querySelectorAll('td')[1].textContent.trim());
+            // console.log(document.getElementById(productID).querySelectorAll('td')[2].textContent.trim());
+            // console.log(document.getElementById(productID).querySelectorAll('td')[3].textContent.trim());
+            setEditFormValues(popupEdit, productID);
+
+            if (submitbtnEdit) {
+                submitbtnEdit.addEventListener('click', function () {
+                    getUpdatedProductDetails(popupEdit, productID);
+                })
+            }
+        });
+        // Function to set the values in the edit popup form fields
+        function setEditFormValues(popup, productID) {
+            var productNameInput = popup.querySelector("input[name='product_name']");
+            var productQuantityInput = popup.querySelector("input[name='product_quantity']");
+            var productPriceInput = popup.querySelector("input[name='price']");
+            var productDescriptionTextarea = popup.querySelector("textarea[name='product_description']");
+            var productImageInput = popup.querySelector("#show-image-edit");
+
+            if (productNameInput) {
+                productNameInput.value = document.getElementById(productID).querySelector('span').textContent.trim();
+            }
+
+            if (productQuantityInput) {
+                productQuantityInput.value = document.getElementById(productID).querySelectorAll('td')[1].textContent.trim();
+            }
+
+            if (productPriceInput) {
+                productPriceInput.value = document.getElementById(productID).querySelectorAll('td')[2].querySelector('strong').textContent.trim();
+            }
+            if (productImageInput) {
+                var productImageSrc = document.getElementById(productID).querySelector('img').getAttribute('src');
+                productImageInput.src = productImageSrc;
+            }
+
+            if (productDescriptionTextarea) {
+                productDescriptionTextarea.disabled = true; // Set the textarea as disabled
+            }
+        }
+
+        function getUpdatedProductDetails(popup, productID) {
+            if (confirm('Are you sure to update the product details?') == true) {
+                var productNameInput2 = popup.querySelector("input[name='product_name']");
+                var productQuantityInput2 = popup.querySelector("input[name='product_quantity']");
+                var productPriceInput2 = popup.querySelector("input[name='price']");
+                var productImageInput2 = document.getElementById('upload-image-edit').files[0];
+
+                // console.log(productNameInput2.value);
+                // console.log(productQuantityInput2.value);
+                // console.log(productPriceInput2.value);
+                // console.log(productImageInput2);
+
+                var formData = new FormData();
+                formData.append('product_name', productNameInput2.value);
+                formData.append('price', productPriceInput2.value);
+                formData.append('product_quantity', productQuantityInput2.value);
+                formData.append('image', productImageInput2);
+                formData.append('product_uid', productID);
+
+                fetch('/accounts/api/admin/update-product/', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        // Handle the response data
+                        alert(data.message)
+                        location.reload(); // Reload the page
+                    })
+                    .catch(function (error) {
+                        alert(data.message)
+                    });
+            }
+
+
+        }
+    });
+</script>
+
+
+
+
+</html>

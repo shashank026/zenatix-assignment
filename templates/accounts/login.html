@@ -1,0 +1,110 @@
+{% extends "base/base.html" %}
+
+{% block start %}
+<!-- Section: Design Block -->
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="my-5 display-3 fw-bold ls-tight">
+                        The best offer <br />
+                        <span class="text-primary">for your business</span>
+                    </h1>
+                    <p style="color: hsl(217, 10%, 50.8%)">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Eveniet, itaque accusantium odio, soluta, corrupti aliquam
+                        quibusdam tempora at cupiditate quis eum maiores libero
+                        veritatis? Dicta facilis sint aliquid ipsum atque?
+                    </p>
+                </div>
+
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card">
+                        <div class="card-body py-5 px-md-5">
+                            <form id="login-form">
+                                <!-- {% csrf_token %} -->
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <h2 style="text-align: center;">Login</h2>
+                                <br>
+                                <div id="alert-container"></div>
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" required id="form3Example3" class="form-control" name="email" />
+                                    <label class="form-label" for="form3Example3">Email address</label>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" required id="form3Example4" class="form-control"
+                                        name="password" />
+                                    <label class="form-label" for="form3Example4">Password</label>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                    Login
+                                </button>
+                            </form>
+                            <p>New User? <a href="/accounts/register">Create an Account</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+</section>
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch('/accounts/login/', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Handle the response based on the status
+                if (data.status === 200) {
+                    // Display success message or perform any desired actions
+                    console.log('Login successful');
+
+                    // Redirect to a new page if needed
+                    window.location.href = '/';
+                } else {
+                    // Display error message or perform any desired actions
+                    console.log(data.message);
+
+                    // Clear existing alert messages
+                    const alertContainer = document.getElementById('alert-container');
+                    alertContainer.innerHTML = '';
+
+                    // Create and append the error alert
+                    const errorMessage = data.message;
+                    const errorAlert = document.createElement('div');
+                    errorAlert.classList.add('alert', 'alert-danger');
+                    errorAlert.setAttribute('role', 'alert');
+                    errorAlert.innerText = errorMessage;
+                    alertContainer.appendChild(errorAlert);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                // Handle any other errors
+            });
+    });
+</script>
+
+{% endblock%}

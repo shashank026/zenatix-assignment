@@ -1,0 +1,164 @@
+{% extends "base/base.html" %}
+
+{% block start %}
+<!-- Section: Design Block -->
+<style>
+    .intl-tel-input {
+        display: table-cell;
+    }
+
+    .intl-tel-input .selected-flag {
+        z-index: 4;
+    }
+
+    .intl-tel-input .country-list {
+        z-index: 5;
+    }
+
+    .input-group .intl-tel-input .form-control {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 0;
+    }
+</style>
+<section class="">
+    <!-- Jumbotron -->
+    <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="container">
+            <div class="row gx-lg-5 align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="my-5 display-3 fw-bold ls-tight">
+                        The best offer <br />
+                        <span class="text-primary">for your business</span>
+                    </h1>
+                    <p style="color: hsl(217, 10%, 50.8%)">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Eveniet, itaque accusantium odio, soluta, corrupti aliquam
+                        quibusdam tempora at cupiditate quis eum maiores libero
+                        veritatis? Dicta facilis sint aliquid ipsum atque?
+                    </p>
+                </div>
+
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="card">
+                        <div class="card-body py-5 px-md-5">
+                            <form id="login-form">
+                                <h2 style="text-align: center;">Registration</h2>
+                                <br>
+                                <div id="alert-container"></div>
+                                <!-- 2 column grid layout with text inputs for the first and last names -->
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" required id="form3Example1" class="form-control"
+                                                name="first_name" />
+                                            <label class="form-label" for="form3Example1">First name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-outline">
+                                            <input type="text" required id="form3Example2" class="form-control"
+                                                name="last_name" />
+                                            <label class="form-label" for="form3Example2">Last name</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" required id="form3Example3" class="form-control" name="email" />
+                                    <label class="form-label" for="form3Example3">Email address</label>
+                                </div>
+
+                                <!-- Phone Number input -->
+                                <div class="form-outline mb-4" id="yourInputFieldId">
+                                    <input type="tel" required class="form-control" name="phone_number">
+                                    <label class="form-label" for="form3Example3">Phone Number</label>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" required id="form3Example4" class="form-control"
+                                        name="password" />
+                                    <label class="form-label" for="form3Example4">Password</label>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                    Sign up
+                                </button>
+                            </form>
+                            <p>Already have an Account? <a href="/accounts/login/">Click Here to Login</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
+    <script>
+        $("#yourInputFieldId").intlTelInput({
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/8.4.6/js/utils.js"
+        });
+    </script>
+</section>
+<!-- Section: Design Block -->
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch('/accounts/register/', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                // Handle the response based on the status
+                if (data.status === 200) {
+                    // Clear existing alert messages
+                    const alertContainer = document.getElementById('alert-container');
+                    alertContainer.innerHTML = '';
+
+                    // Create and append the error alert
+                    const errorMessage = data.message;
+                    const errorAlert = document.createElement('div');
+                    errorAlert.classList.add('alert', 'alert-success');
+                    errorAlert.setAttribute('role', 'alert');
+                    errorAlert.innerText = errorMessage;
+                    alertContainer.appendChild(errorAlert);
+                } else {
+                    // Display error message or perform any desired actions
+                    console.log(data.message);
+
+                    // Clear existing alert messages
+                    const alertContainer = document.getElementById('alert-container');
+                    alertContainer.innerHTML = '';
+
+                    // Create and append the error alert
+                    const errorMessage = data.message;
+                    const errorAlert = document.createElement('div');
+                    errorAlert.classList.add('alert', 'alert-warning');
+                    errorAlert.setAttribute('role', 'alert');
+                    errorAlert.innerText = errorMessage;
+                    alertContainer.appendChild(errorAlert);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                // Handle any other errors
+            });
+    });
+</script>
+
+{% endblock%}
