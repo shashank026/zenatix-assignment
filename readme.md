@@ -37,7 +37,7 @@ Follow these steps to set up the Django E-Commerce web application on your local
 ```
 - Start the development server:
 ```bash
-  python manage.py runserver
+  python3 manage.py runserver
 ```
 - Access the application in your web browser at `http://localhost:8000`
 ## Docker Deployment
@@ -54,7 +54,7 @@ To deploy the Django E-Commerce web application using [Docker](https://docs.dock
 ```
 - Access the application in your web browser at `http://localhost:8000`
 
-To stop the application running from docker, do run the following commands:
+**To stop the application running from docker, do run the following commands:**
 ```bash
   docker ps
 ```
