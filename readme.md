@@ -12,7 +12,7 @@ building and managing an e-commerce website, allowing you to purchase products o
 ## Features
 
 - **User Registration and Authentication:** Users can create accounts, log in, and manage their profiles.
-- **Product Catalog:** Display and categorize your products with detailed information such as title, description, price, and images.
+- **Product Catalog:** Display and categorize the products with detailed information such as title, description, price, and images.
 - **Shopping Cart:** Users can add products to their cart, and proceed to checkout.
 - **Order Management:** Administrators can manage and process orders, including order status updates and tracking information.
 - **Admin Dashboard:** A comprehensive admin dashboard provides administrators with full control over the application, including managing products, orders, users, and more.
@@ -42,7 +42,7 @@ Follow these steps to set up the Django E-Commerce web application on your local
 - Access the application in your web browser at `http://localhost:8000`
 ## Docker Deployment
 
-To deploy the Django E-Commerce web application using [Docker](https://docs.docker.com/engine/install/), make sure you have Docker installed and follow these steps:
+To deploy the Django E-Commerce web application using [Docker](https://docs.docker.com/engine/install/), make sure you have Docker Compose installed and follow these steps:
 
 - Build the Docker image:
 ```bash
