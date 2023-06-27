@@ -1,7 +1,10 @@
 
 # Django E-Commerce web application
 
-This Django E-Commerce web application is a fully functional and customizable online store platform. It provides a robust foundation for building and managing an e-commerce website, allowing you to sell products or services online with ease.
+This Django E-Commerce web application is a fully functional and customizable online store platform. It provides a robust foundation for 
+building and managing an e-commerce website, allowing you to sell products or services online with ease.
+
+![](https://github.com/shashank026/zenatix-assignment/blob/main/readmeImage/Admin_Dashboard.gif)
 
 
 
