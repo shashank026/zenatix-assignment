@@ -101,3 +101,7 @@ To access the admin dashboard, follow these steps:
 Once logged in, you will have access to the admin dashboard and its features.
 
 __Please note that the provided demo admin account is for testing purposes only. In a production environment, it is essential to create a secure and unique admin account with a strong password.__
+
+![](https://github.com/shashank026/zenatix-assignment/blob/main/readmeImage/Admin-Dashboard-main.png)
+
+![](https://github.com/shashank026/zenatix-assignment/blob/main/readmeImage/Admin-Dashboard-OrderHistory-Dark.png)
